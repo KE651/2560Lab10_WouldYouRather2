@@ -1,16 +1,15 @@
 <template>
   <div class="wyr">
-    <h2>Please make your choice!</h2>
-    <h3>{{ questionData.question }}</h3>
+    <h2>Would you rather...</h2>
+    <h3>{{ question }}</h3>
 
     <input type="radio" class="button" v-model="choice"
-           v-bind:value="questionData.answer1" v-on:change="choiceMade">
-    <label>{{ questionData.answer1 }}</label>
+           v-bind:value="answer1" v-on:change="choiceMade">
+    <label>{{ answer1 }}</label>
 
     <input type="radio" class="button" v-model="choice"
-           v-bind:value="questionData.answer2" v-on:change="choiceMade">
-    <label>{{ questionData.answer2 }}</label>
-    <br><br>
+           v-bind:value="answer2" v-on:change="choiceMade">
+    <label>{{ answer2 }}</label>
 
   </div>
 </template>
@@ -19,7 +18,10 @@
 export default {
   name: 'WouldYouRather',
   props: {
-    questionData: Object
+    question: String,
+    answer1: String,
+    answer2: String,
+    id: Number
     //props are for data given to child by parent, component should not modify props
   }, // end props
 
@@ -32,8 +34,8 @@ export default {
   methods: {
     choiceMade() {
       //emit an event 'answer-changed' with value of selection
-      console.log('choiceMade reached ', this.choice, this.questionData.id)
-      this.$emit('answer-changed', this.choice, this.questionData.id)
+      // console.log('choiceMade reached ', this.choice, this.id)
+      this.$emit('answer-changed', this.choice, this.id)
       // name of event is 'answer-changed', convention is for dashes in events
       // $emit(name-of-event, argument1, argument2, ..)
     } // end choiceMade
@@ -48,9 +50,9 @@ export default {
 
 .wyr {
   margin: 30px;
-  border: 4px purple solid;
-  color: black;
+  border: 4px purple double;
+  color: darkblue;
   background-color: azure;
-  font-style:oblique
+  font-style:italic;
 }
 </style>
